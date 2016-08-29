@@ -1,0 +1,86 @@
+    1  docker ps -a
+    2  docker images -a
+    3  docker tag 0d4 nginx
+    4  docker images -a
+    5  systemctl restart kube-proxy kubelet docker
+    6  docker images -a
+    7  docker ps -a
+    8  docker ps   -a
+    9  docker ps -a
+   10   wget -P ~ https://github.com/yeasy/docker_practice/raw/master/_local/.bashrc_docker;
+   11  yum install -y wget
+   12   wget -P ~ https://github.com/yeasy/docker_practice/raw/master/_local/.bashrc_docker;
+   13  echo "[ -f ~/.bashrc_docker ] && . ~/.bashrc_docker" >> ~/.bashrc; source ~/.bashrc
+   14  docker ps -a
+   15  docker-enter 728
+   16  docker pull index.tenxcloud.com/google_containers/kube-ui
+   17  docker pull index.tenxcloud.com/google_containers/kube-ui:v5
+   18  docker pull index.tenxcloud.com/google_containers/kube-ui:v3
+   19  docker images -a
+   20  docker tag 56d gcr.io/google_containers/kube-ui:v3
+   21  docker images -a
+   22  yum install -y flannel
+   23  vi /etc/sysconfig/flanneld
+   24  systemctl start flanneld
+   25  systemctl status flanneld
+   26  systemctl start flanneld
+   27  systemctl status flanneld
+   28  systemctl stop flanneld
+   29  systemctl start flanneld
+   30  systemctl status flanneld
+   31  docker ps -a
+   32  ps aux | grep docker
+   33  cd /usr/lib/systemd/system/
+   34  cat flanneld.service 
+   35  cd ../
+   36  cd /etc/syc
+   37  cd /etc/sysconfig/
+   38  ls
+   39  vi flanneld 
+   40  etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
+   41  etcdctl mk /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
+   42  etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
+   43  service stop docker
+   44  systemctl stop docker
+   45* 
+   46  etcdctl mk /coreos.com/network/config '{"Network":"10.1.0.0/16"}'
+   47  cat flanneld 
+   48  ping k8s-master
+   49  systemctl restart flanneld 
+   50  systemctl stop docker
+   51  systemctl restart flanneld 
+   52  docker ps -a
+   53  systemctl stop flanneld 
+   54  systemctl start flanneld 
+   55  systemctl status flanneld 
+   56  systemctl start flanneld 
+   57  systemctl status flanneld 
+   58  etcdctl get /coreos.com/network/config
+   59  systemctl status flanneld 
+   60  cd /var/log/messages
+   61  systemctl status flanneld 
+   62  systemctl status -l flanneld 
+   63  systemctl start flannld
+   64  systemctl start flanneld 
+   65  systemctl status -l flanneld 
+   66  etcdctl --endpoints="http://k8s-master:2379" ls
+   67  systemctl restart flanneld 
+   68  ps aux | grep flanneld 
+   69  cd /etc/kubernetes/
+   70  ls
+   71  cat apiserver 
+   72  vi apiserver 
+   73  cat kubelet 
+   74  ls
+   75* 
+   76  cat kubelet 
+   77  systemclt restart flanneld
+   78  systemctl restart flanneld
+   79* 
+   80  mk-docker-opt.sh -i
+   81  systemctl restart docker
+   82  ip addr
+   83  systemclt restart flanneld
+   84  systemctl restart flanneld
+   85  history 
+   86  history >> 1.txt
