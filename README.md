@@ -45,14 +45,15 @@
 ###nginx-phpfpm-pod.yaml说明:####
 
     volumeMounts:
-        - name: nfs 
-          mountPath: "/usr/share/nginx/html"//容器中的目录
+      - name: nfs 
+        mountPath: "/usr/share/nginx/html"//容器中的目录
 
     volumes://定义挂载的nfs服务器
-    - name: nfs
+      - name: nfs
       nfs:
         server: 192.168.27.134 //服务器地址
         path: "/mnt/nfs_file" //服务器的共享目录
+注：node节点需安装nfs客户端,搭建详细见nfs说明
 
 
  
