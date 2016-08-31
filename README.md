@@ -40,4 +40,19 @@
 注：nfs-server状态可能是active(Exited)
 
 
+##kubernetes-nginx-php-mysql搭建说明###
+
+###nginx-phpfpm-pod.yaml说明:####
+
+    volumeMounts:
+        - name: nfs 
+          mountPath: "/usr/share/nginx/html"//容器中的目录
+
+    volumes://定义挂载的nfs服务器
+    - name: nfs
+      nfs:
+        server: 192.168.27.134 //服务器地址
+        path: "/mnt/nfs_file" //服务器的共享目录
+
+
  

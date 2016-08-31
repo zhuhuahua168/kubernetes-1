@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nfs-server
+  labels:
+    role: nfs-server
+spec:
+  containers:
+    - name: nfs-server
+      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/nfs-data
+      ports:
+        - containerPort: 2049
