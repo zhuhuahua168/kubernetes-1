@@ -56,4 +56,7 @@
 注：node节点需安装nfs客户端,搭建详细见nfs说明
 
 
+###注意：nfs给pod挂载文件时，不能挂载配置文件，否则不能解析。如不能把nginx的default.cnf挂载上docker容器内的nginx,配置文件尽可能做成镜像
+
+
  

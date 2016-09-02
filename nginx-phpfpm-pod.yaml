@@ -7,22 +7,39 @@ metadata:
 spec:
   containers:
     - name: nginx
-      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/nginx
+      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/nginx_51tywy:v1.0
       ports:
         - containerPort: 80
+          hostPort: 80
       volumeMounts:
         - name: nfs
           mountPath: "/usr/share/nginx/html"
-    - name: php-fpm
+        - name: ssl
+          mountPath: "/etc/nginx/ssl"
+    - name: php
       image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php
       ports:
         - containerPort: 9000
       volumeMounts:
         - name: nfs
           mountPath: "/usr/share/nginx/html"
+        - name: phpconf
+          mountPath: "/usr/local/etc/php/conf.d"
 
   volumes:
     - name: nfs
       nfs:
         server: 192.168.27.134
-        path: "/mnt/nfs_file"
+        path: "/mnt/nfs_file/site"
+    - name: nginxconf
+      nfs:
+        server: 192.168.27.134
+        path: "/mnt/nfs_file/nginx/conf"
+    - name: ssl
+      nfs:
+        server: 192.168.27.134
+        path: "/mnt/nfs_file/nginx/ssl"
+    - name: phpconf
+      nfs:
+        server: 192.168.27.134
+        path: "/mnt/nfs_file/php/conf"
