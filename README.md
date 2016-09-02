@@ -1,4 +1,10 @@
-1.构建DOCKER[https://github.com/zouhuigang/kubernetes/tree/master/docker](https://github.com/zouhuigang/kubernetes/tree/master/docker "查看构建DOCKER")
+###1.构建DOCKER，生成docker images  [查看详情](https://github.com/zouhuigang/kubernetes/tree/master/docker "查看构建DOCKER")
+
+
+###2.搭建NFS服务器，共享网站代码及数据库 [查看详情](https://github.com/zouhuigang/kubernetes/tree/master/nfs-service)
+
+###3.搭建kubernetes环境 [查看详情](https://github.com/zouhuigang/kubernetes/tree/master/zhg-study)
+
 
 ##kubernetes-nginx-php-mysql搭建说明###
 
