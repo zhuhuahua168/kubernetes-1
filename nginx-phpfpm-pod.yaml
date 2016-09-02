@@ -14,32 +14,16 @@ spec:
       volumeMounts:
         - name: nfs
           mountPath: "/usr/share/nginx/html"
-        - name: ssl
-          mountPath: "/etc/nginx/ssl"
     - name: php
-      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php
+      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php:51tywy
       ports:
         - containerPort: 9000
       volumeMounts:
         - name: nfs
           mountPath: "/usr/share/nginx/html"
-        - name: phpconf
-          mountPath: "/usr/local/etc/php/conf.d"
 
   volumes:
     - name: nfs
       nfs:
         server: 192.168.27.134
         path: "/mnt/nfs_file/site"
-    - name: nginxconf
-      nfs:
-        server: 192.168.27.134
-        path: "/mnt/nfs_file/nginx/conf"
-    - name: ssl
-      nfs:
-        server: 192.168.27.134
-        path: "/mnt/nfs_file/nginx/ssl"
-    - name: phpconf
-      nfs:
-        server: 192.168.27.134
-        path: "/mnt/nfs_file/php/conf"
