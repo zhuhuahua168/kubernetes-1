@@ -1,7 +1,8 @@
 <?php
+//$servername = "mysql";//docker服务
 $servername = "mysql";
 $username = "root";
-$password = "TYwy2016720";
+$password = "123456";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);

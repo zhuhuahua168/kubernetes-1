@@ -27,5 +27,35 @@ pod定义nfs
 
 注意：nfs给pod挂载文件时，不能挂载配置文件，否则不能解析。如不能把nginx的default.cnf挂载上docker容器内的nginx,配置文件尽可能做成镜像
 
+##使用securityContext
+master中的kubelet:
+
+    KUBELET_OPTS="--allow_privileged=true"
+
+master中的api-service:
+
+    KUBE_APISERVER_OPTS="--allow_privileged=true"
+
+
+重启动服务：
+
+    systemctl restart kubelet 
+    systemctl restart kube-apiserver
+ 
+ 
+查看设置：
+
+    ps -ef | grep kube
+
+##遇到的问题
+
+Q:nfs挂载进mysql数据库,报错信息如下：
+
+    [ERROR] --initialize specified but the data directory 
+    has files in it. Aborting.
+    
+    [ERROR] Aborting
+
+A： mysqld --initialize，如果 datadir 指向的目标目录下已经有数据文件，则会有类似提示。因此，需要先确保 datadir 目标目录下是空的，避免误操作破坏已有数据。所以mysqldata目录应该为空
 
  
