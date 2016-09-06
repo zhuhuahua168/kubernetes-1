@@ -1,4 +1,11 @@
 ##使用方法###
+各node,编辑文件/etc/kubernetes/kubelet:
+
+    KUBELET_ARGS="--cluster_dns=10.254.200.200 --cluster-domain=cluster.local"
+
+提示：KUBELET_ARGS前面不能有空格.
+
+
 master:
 
     kubectl create -f skydns-rc-v8.yaml
