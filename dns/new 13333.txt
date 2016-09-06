@@ -1,0 +1,75 @@
+kube2sky flag provided but not defined: -kube-master_url或falling back to default configuration, could not read from etcd: 100: Key not found
+
+It seems kube2sky can't connect to etcd, so it can't write service and endpointt information into etcd
+
+docker pull index.tenxcloud.com/google_containers/skydns:2015-03-11-001
+
+
+
+docker tag 951a gcr.io/google_containers/exechealthz:1.0
+
+docker tag index.tenxcloud.com/google_containers/etcd-amd64:2.2.1 gcr.io/google_containers/etcd-amd64:2.2.1
+
+
+docker tag index.tenxcloud.com/google_containers/kube2sky:1.12 gcr.io/google_containers/kube2sky:1.12
+
+docker tag index.tenxcloud.com/google_containers/skydns:2015-10-13-8c72f8c gcr.io/google_containers/skydns:2015-10-13-8c72f8c
+
+
+http://xuxinkun.github.io/2016/07/22/kubernetes-dns/
+
+https://github.com/kubernetes/kubernetes/issues/21949
+
+http://www.cnblogs.com/xuxinkun/p/5702791.html
+
+
+https://github.com/kubernetes/kubernetes/issues/27722
+
+
+
+
+
+
+
+
+认证：
+https://github.com/kubernetes/kubernetes/issues/11000
+./make-ca-cert.sh <master_ip> IP:<master_ip>,IP:10.0.0.1,DNS:kubernetes,DNS:kubernetes.default,DNS:kubernetes.default.svc,DNS:kubernetes.default.svc.cluster.local
+
+./make-ca-cert.sh 192.168.27.131 IP:192.168.27.131,IP:10.0.0.1,DNS:kubernetes,DNS:kubernetes.default,DNS:kubernetes.default.svc,DNS:kubernetes.default.svc.cluster.local
+
+
+
+
+# default admission control policies
+KUBE_ADMISSION_CONTROL="--admission-control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota"
+ 
+
+# Add your own!
+KUBE_API_ARGS="--client-ca-file=/srv/k8s/ca.crt \
+               --tls-private-key-file=/srv/k8s/server.key \
+               --tls-cert-file=/srv/k8s/server.cert"
+			   
+
+重启apiserver服务
+[root@k8s_master kubernetes]# systemctl restart kube-apiserver
+[root@k8s_master kubernetes]# systemctl status kube-apiserver
+
+
+root@k8s_master kubernetes]# vi controller-manager 
+# Add your own!
+KUBE_CONTROLLER_MANAGER_ARGS="--service-account-private-key-file=/srv/k8s/server.key \
+                              --root-ca-file=/srv/k8s/ca.crt"
+							  
+重启controller-manager服务：
+[root@k8s_master kubernetes]# systemctl restart kube-controller-manager
+[root@k8s_master kubernetes]# systemctl status kube-controller-manager
+
+
+https://github.com/projectatomic/nulecule-library/blob/master/skydns-atomicapp/README.md
+
+
+flanneld --ip-masq -etcd-endpoints=http://172.28.128.8:4001 -etcd-prefix=/coreos.com/network
+
+
+

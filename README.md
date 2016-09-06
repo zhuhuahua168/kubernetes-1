@@ -47,6 +47,15 @@ master中的api-service:
 
     ps -ef | grep kube
 
+
+
+在Kubernetes集群，pod访问其他pod的service，有两种方法。
+
+一种是pod中添加环境变量，前提是service必须在pod之前创建；
+
+一种是DNS自动发现。
+
+
 ##遇到的问题
 
 Q:nfs挂载进mysql数据库,报错信息如下：

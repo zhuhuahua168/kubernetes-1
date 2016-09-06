@@ -1,6 +1,7 @@
 <?php
-//$servername = "mysql";//docker服务
-$servername = "mysql";
+$servername = "mysql";//docker服务
+//$servername = "10.254.54.99";
+//$servername = "10.1.85.3";//pods暴露给service的虚拟ip地址或service中定义的名字
 $username = "root";
 $password = "123456";
 

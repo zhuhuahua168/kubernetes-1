@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: mysql
   labels:
-    app: mysql
+    name: mysql
 spec:
   containers:
     - name: mysql
@@ -18,7 +18,7 @@ spec:
           # Change this password!
           value: "123456"
       resources:
-        limits:
+          limits:
           cpu: 0.5
       volumeMounts:
         - name: mysql-nfs
