@@ -1,3 +1,12 @@
+##使用方法###
+master:
+
+    kubectl create -f skydns-rc-v8.yaml
+
+    kubectl create -f skydns-service.yaml
+
+提示：因国内不能翻墙，所以务必确保node上已下载了文件中的这些镜像文件。
+
 ##下载镜像文件##
 
 下载busybox:
