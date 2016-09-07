@@ -112,3 +112,7 @@ A:node节点上的kubelet没有配置好，/etc/kubernetes/kubelet正常的配�
 
     systemctl daemon-reload
     systemctl restart kubelet
+
+
+参考资料：
+http://kubernetes.io/docs/getting-started-guides/ubuntu-calico/

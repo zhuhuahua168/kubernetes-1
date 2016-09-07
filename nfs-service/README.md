@@ -1,4 +1,16 @@
 ##nfs说明###
+centos7实践使用方法
+
+1.创建网站挂载目录
+
+    mkdir -p nfs_file/sites/51tywy
+
+2.创建数据库挂载目录
+
+    mkdir -p nfs_file/mysqldata
+注意：如果mysql为5.7要保存该目录没有任何数据
+
+
 ###客户端：
     yum install nfs-utils
 
