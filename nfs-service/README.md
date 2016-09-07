@@ -1,16 +1,39 @@
 ##nfs说明###
 centos7实践使用方法
 
+server:
+
 1.创建网站挂载目录
 
-    mkdir -p nfs_file/sites/51tywy
+    mkdir -p /nfs_file/sites/51tywy
 
 2.创建数据库挂载目录
 
-    mkdir -p nfs_file/mysqldata
+    mkdir -p /nfs_file/mysqldata
 注意：如果mysql为5.7要保存该目录没有任何数据
 
+3.安装(server/client)
 
+    yum -y install nfs-utils 
+
+4.vi  /etc/exports
+
+    /nfs_file/sites/51tywy *(rw,sync,no_root_squash,insecure)
+    /nfs_file/mysqldata *(rw,sync,no_root_squash,insecure)
+
+5.开启
+
+    systemctl start rpcbind nfs-server
+
+6.挂载
+
+如采用kubernetes则，在pod.yaml中配置。其他挂载参考下面文档
+
+
+
+
+
+##以下是通用介绍
 ###客户端：
     yum install nfs-utils
 
