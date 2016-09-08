@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: grafana
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    name: grafana
+  template:
+    metadata:
+      labels:
+        name: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: index.tenxcloud.com/google_containers/heapster_grafana:v2.6.0-2
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
+          env:
+            - name: INFLUXDB_HOST
+              value: monitoring-influxdb
