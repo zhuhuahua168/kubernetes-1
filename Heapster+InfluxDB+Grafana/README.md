@@ -94,3 +94,14 @@
     kubectl delete -f influxdb-controller.yaml
     kubectl delete -f heapster-controller.yaml
     kubectl delete -f grafana-controller.yaml
+
+
+
+访问地址：http:nodeip:30080
+
+
+http://www.07net01.com/2015/08/897844.html?qqdrsign=009df
+
+http://www.pangxie.space/docker/727
+
+http://www.codecp.org/archives/1611

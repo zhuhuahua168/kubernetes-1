@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: grafana
-          image: index.tenxcloud.com/google_containers/heapster_grafana:v2.6.0-2
+          image: index.tenxcloud.com/google_containers/heapster_grafana:v0.7
           ports:
             - containerPort: 8080
               hostPort: 8080
