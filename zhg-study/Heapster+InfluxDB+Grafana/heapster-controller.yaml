@@ -19,4 +19,4 @@ spec:
           command:
             - /heapster
             - --source=kubernetes:http://139.196.48.36:8080?inClusterConfig=false&kubeletHttps=true&kubeletPort=10250&useServiceAccount=true&auth=
-            - --sink=influxdb:http://139.196.48.36:8086
+            - --sink=influxdb:http://monitoring-influxdb:8086

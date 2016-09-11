@@ -68,7 +68,7 @@ vi /etc/hosts
     KUBELET_PORT="--kubelet-port=10250"
 
     # Comma separated list of nodes in the etcd cluster
-    KUBE_ETCD_SERVERS="--etcd-servers=http://127.0.0.1:2379"
+    KUBE_ETCD_SERVERS="--etcd-servers=http://k8s-master:2379"
 
     # Address range to use for services
     KUBE_SERVICE_ADDRESSES="--service-cluster-ip-range=10.254.0.0/16"
@@ -198,6 +198,19 @@ docker tag registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/pause gcr.io/googl
 http：//masterip:8080/ui
 
 
+##搭建flanneld请查看/flannel
+
+##搭建dns
+
+##安装Heapster+InfluxDB+Grafana
+
+
+
+问题：
+
+Q:apiserver启动错误代码code:255 main-pid:xxxx
+
+A：重启动reboot
 
 
 

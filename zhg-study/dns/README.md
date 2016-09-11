@@ -5,8 +5,17 @@
 
 提示：KUBELET_ARGS前面不能有空格.
 
+重启：
+    
+    systemctl restart kubelet
+
+查看，启动参数是否有cluster-domain：
+
+    ps aux | grep kubelet
 
 master:
+
+1.修改skydnsrc-v8中的kube_master_url为实际的master地址
 
     kubectl create -f skydns-rc-v8.yaml
 
@@ -112,6 +121,10 @@ A:node节点上的kubelet没有配置好，/etc/kubernetes/kubelet正常的配�
 
     systemctl daemon-reload
     systemctl restart kubelet
+
+
+Q:有些情况下是会提示不能创建目录的
+A:把securityContext权限打开
 
 
 参考资料：

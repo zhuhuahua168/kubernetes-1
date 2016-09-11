@@ -2,16 +2,16 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
-    name: grafanainfluxdb
-  name: grafanainfluxdb
+    name: influxdb
+  name: influxdb
 spec:
   replicas: 1
   selector:
-    name: grafanainfluxdb
+    name: influxdb
   template:
     metadata:
       labels:
-        name: grafanainfluxdb
+        name: influxdb
     spec:
       containers:
         - name: influxdb
@@ -21,11 +21,6 @@ spec:
               hostPort: 8083
             - containerPort: 8086
               hostPort: 8086
-        - name: grafana
-          image: index.tenxcloud.com/google_containers/heapster_grafana:v0.7
-          ports:
-            - containerPort: 8080
-              hostPort: 30080
           env:
             - name: INFLUXDB_HOST
-              value: monitoringinfluxdb
+              value: monitoring-influxdb

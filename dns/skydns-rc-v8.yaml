@@ -22,8 +22,8 @@ spec:
       containers:
       - name: etcd
         image: gcr.io/google_containers/etcd-amd64:2.2.1
-        securityContext:
-          privileged: true
+        #securityContext:
+        #  privileged: true
         command:
         - /usr/local/bin/etcd
         - -data-dir
@@ -40,7 +40,7 @@ spec:
       - name: kube2sky 
         image: gcr.io/google_containers/kube2sky:1.12
         args:
-        - "--kube_master_url=http://192.168.27.131:8080"
+        - "--kube_master_url=http://139.196.48.36:8080"
         # "--etcd-server=https://localhost:4001"
         - "-domain=cluster.local"
       - name: skydns
