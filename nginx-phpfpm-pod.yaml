@@ -10,7 +10,7 @@ spec:
       image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/nginx_51tywy:v1.0
       ports:
         - containerPort: 80
-          hostPort: 80
+          hostPort: 8001
       volumeMounts:
         - name: nfs
           mountPath: "/usr/share/nginx/html"
@@ -25,5 +25,5 @@ spec:
   volumes:
     - name: nfs
       nfs:
-        server: 192.168.27.134
-        path: "/mnt/nfs_file/site"
+        server: 139.196.16.67
+        path: "/nfs_file/sites/51tywy"

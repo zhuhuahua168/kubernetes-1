@@ -101,3 +101,23 @@ If docker is already running, then stop docker, delete docker bridge (docker0), 
     ip link delete docker0
     systemctl start flanneld
     systemctl start docker
+
+
+
+Q:etcd cluster is unavailable or misconfigured
+
+A:操作如下命令的时候出错
+
+[root@204 data]# etcdctl mkdir /app
+
+Error: client: etcd cluster is unavailable or misconfigured
+
+error #0: dial tcp 127.0.0.1:2379: getsockopt: connection refused
+
+error #1: dial tcp 127.0.0.1:4001: getsockopt: connection refused
+
+这是因为没有指定ip信息，加上ip就可以了，比如ls命令，这样写
+
+etcdctl –-endpoints "http://192.168.1.204:2379,http://192.168.1.204:2380" ls
+或者重启
+

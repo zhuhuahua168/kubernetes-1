@@ -48,7 +48,7 @@ spec:
         #command:
         # /kube2sky
         args:
-        - "--kube_master_url=http://192.168.27.131:8080"
+        - "--kube_master_url=http://139.196.48.36:8080"
         # "--etcd-server=http://localhost:4001"
         - "-domain=cluster.local"
       - name: skydns

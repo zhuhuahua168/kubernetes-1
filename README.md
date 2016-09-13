@@ -5,6 +5,8 @@
 
 3.搭建kubernetes环境 [查看详情](https://github.com/zouhuigang/kubernetes/tree/master/zhg-study)
 
+4.搭建flanneld网络环境 [查看详情]
+
 
 ###kubernetes-nginx-php-mysql搭建说明###
 
@@ -36,6 +38,10 @@ master中的api-service:
 
     KUBE_APISERVER_OPTS="--allow_privileged=true"
 
+master中的config:
+
+    KUBE_ALLOW_PRIV="--allow_privileged=true"
+
 
 重启动服务：
 
@@ -66,5 +72,10 @@ Q:nfs挂载进mysql数据库,报错信息如下：
     [ERROR] Aborting
 
 A： mysqld --initialize，如果 datadir 指向的目标目录下已经有数据文件，则会有类似提示。因此，需要先确保 datadir 目标目录下是空的，避免误操作破坏已有数据。所以mysqldata目录应该为空
+
+
+Q:重启之后,kube-apiserver还是不能启动。the control process exited
+
+A：查看/var/run/kubernetes中是否生成了证书文件。
 
  

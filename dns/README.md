@@ -1,6 +1,6 @@
-##老版本kube2dns+skydns+etcd版本的已迁移至zhg-study/dns中，本版本采用kubernets最新的kubedns模板代码生成的。自动生成方法见我的github项目中。现在我是采用手工替换的方法
+##老版本kube2dns+skydns+etcd版本的已迁移至zhg-study/dns中。[查看老版本说明](https://github.com/zouhuigang/kubernetes/tree/master/zhg-study/dns)
 
-###下面是2个kubeyaml模板
+###下面是2个kubeyaml模板，自动生成方法见我的github项目中。
 
     skydns-rc.yaml.in
     skydns-svc.yaml.in
@@ -21,3 +21,9 @@
     kubectl delete -f skydns-svc.yaml
     
     kubectl delete -f skydns-rc.yaml
+
+
+
+Q:有些情况下是会提示不能创建目录的
+
+A:把securityContext权限打开

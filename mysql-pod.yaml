@@ -10,22 +10,22 @@ spec:
       image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/mysql:5.7
       ports:
         - containerPort: 3306
+          hostPort: 3306
           name: mysql
       securityContext:
         privileged: true
       env:
         - name: MYSQL_ROOT_PASSWORD
           # Change this password!
-          value: "123456"
-      resources:
-          limits:
-          cpu: 0.5
+          value: "TYwy2016720"
+      #resources:
+      #    limits:
+      #    cpu: 100m
       volumeMounts:
         - name: mysql-nfs
           mountPath: "/var/lib/mysql"
-
   volumes:
     - name: mysql-nfs
       nfs:
-        server: 192.168.27.134
-        path: "/mnt/nfs_file/mysqldata"
+        server: 139.196.16.67
+        path: "/nfs_file/mysqldata"

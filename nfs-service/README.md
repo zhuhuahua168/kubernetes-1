@@ -73,3 +73,13 @@ server:
     systemctl status rpcbind nfs-server 
 
 注：nfs-server状态可能是active(Exited)
+
+
+
+Q:mount.nfs: access denied by server while mounting 139.196.16.67:/mnt/nfs_file/sites
+
+A:
+
+    cat /etc/exports
+    exportfs -rv 
+    查看挂载的目录是否有被共享出来

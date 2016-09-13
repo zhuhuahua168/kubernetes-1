@@ -21,9 +21,9 @@ spec:
     spec:
       containers:
       - name: etcd
-        image: gcr.io/google_containers/etcd-amd64:2.2.1
-        #securityContext:
-        #  privileged: true
+        image: index.tenxcloud.com/google_containers/etcd:2.0.9
+        securityContext:
+          privileged: true
         command:
         - /usr/local/bin/etcd
         - -data-dir
@@ -38,13 +38,13 @@ spec:
         - name : etcd-storage
           mountPath: /var/etcd/data
       - name: kube2sky 
-        image: gcr.io/google_containers/kube2sky:1.12
+        image: index.tenxcloud.com/google_containers/kube2sky:1.11
         args:
         - "--kube_master_url=http://139.196.48.36:8080"
         # "--etcd-server=https://localhost:4001"
         - "-domain=cluster.local"
       - name: skydns
-        image: index.tenxcloud.com/google_containers/skydns:2015-10-13-8c72f8c
+        image: index.tenxcloud.com/google_containers/skydns:2015-03-11-001
         command:
         - /skydns
         args:
