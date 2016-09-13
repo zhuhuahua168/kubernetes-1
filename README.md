@@ -1,3 +1,7 @@
+##整体示意图
+![image](https://github.com/zouhuigang/kubernetes/raw/master/master-node.png)
+![image](https://github.com/zouhuigang/kubernetes/raw/master/service-pod.png)
+
 1.构建DOCKER，生成docker images  [查看详情](https://github.com/zouhuigang/kubernetes/tree/master/docker "查看构建DOCKER")
 
 
@@ -6,6 +10,7 @@
 3.搭建kubernetes环境 [查看详情](https://github.com/zouhuigang/kubernetes/tree/master/zhg-study)
 
 4.搭建flanneld网络环境 [查看详情]
+
 
 
 ###kubernetes-nginx-php-mysql搭建说明###
