@@ -29,6 +29,7 @@ master:
 
     docker pull index.tenxcloud.com/google_containers/busybox:1.24
     docker tag index.tenxcloud.com/google_containers/busybox:1.24 gcr.io/google_containers/busybox:1.24
+    docker tag index.tenxcloud.com/google_containers/busybox:latest registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/busybox:latest
 
 使用方法：kubectl exec -i -t busybox sh
 

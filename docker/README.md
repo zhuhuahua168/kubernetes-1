@@ -17,3 +17,16 @@
 
     sudo docker push registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php:51tywy
 
+
+3.实践编译生成images
+
+1.把workerman上传到linux中，打开目录，运行
+     
+    sudo docker build -t registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/workerman:51tywy .
+
+2.经过一段漫长的等待，images制作好了。然后提交到我的阿里云镜像库
+
+    sudo docker push registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/workerman:51tywy
+
+
+3.运行workerman.yaml

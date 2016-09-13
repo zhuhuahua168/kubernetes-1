@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: mysql
-      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/mysql:5.7
+      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/mysql:51tywy
       ports:
         - containerPort: 3306
           hostPort: 3306
@@ -18,9 +18,9 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           # Change this password!
           value: "TYwy2016720"
-      #resources:
-      #    limits:
-      #    cpu: 100m
+      resources:
+          limits:
+            cpu: 100m
       volumeMounts:
         - name: mysql-nfs
           mountPath: "/var/lib/mysql"
