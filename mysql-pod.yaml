@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: mysql
-      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/mysql:51tywy
+      image: mysql:v51.5.7
       ports:
         - containerPort: 3306
           hostPort: 3306
