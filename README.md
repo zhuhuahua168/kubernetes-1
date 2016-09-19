@@ -67,6 +67,37 @@ master中的config:
 一种是DNS自动发现。
 
 
+##POD扩容
+1.当我们测试的时候，用的pod和service。在不停止pod的情况下，创建rc来控制pod的扩容,rc中的replicas=2。
+
+不然看不到效果
+参照本项目的nginx-phpfpm-pod.yaml和nginx-phpfpm-rc.yaml
+
+php测试代码：
+
+    <?php
+    $servername = "mysql";
+    $username = "root";
+    $password = "123456";
+    echo $_SERVER['SERVER_ADDR'];
+    // Create connection
+     $conn = new mysqli($servername, $username, $password);
+
+    // Check connection
+    if ($conn->connect_error) {
+    die("连接错误: " . $conn->connect_error);
+    }
+    echo "<h1>成功连接 MySQL 服务器</h1>";
+
+    phpinfo();
+
+    ?>
+
+测试效果：
+![image](https://github.com/zouhuigang/kubernetes/images/raw/master/master-node.png)
+![image](https://github.com/zouhuigang/kubernetes/images/raw/master/service-pod.png)
+  
+
 ##遇到的问题
 
 Q:nfs挂载进mysql数据库,报错信息如下：
