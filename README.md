@@ -1,6 +1,6 @@
 ##整体示意图
-![image](https://github.com/zouhuigang/kubernetes/raw/master/master-node.png)
-![image](https://github.com/zouhuigang/kubernetes/raw/master/service-pod.png)
+![image](https://github.com/zouhuigang/kubernetes/raw/master/images/master-node.png)
+![image](https://github.com/zouhuigang/kubernetes/raw/master/images/service-pod.png)
 
 1.构建DOCKER，生成docker images  [查看详情](https://github.com/zouhuigang/kubernetes/tree/master/docker "查看构建DOCKER")
 
@@ -94,8 +94,11 @@ php测试代码：
     ?>
 
 测试效果：
-![image](https://github.com/zouhuigang/kubernetes/images/raw/master/master-node.png)
-![image](https://github.com/zouhuigang/kubernetes/images/raw/master/service-pod.png)
+![image](https://github.com/zouhuigang/kubernetes/raw/master/images/pod1.png)
+![image](https://github.com/zouhuigang/kubernetes/raw/master/images/pod2.png)
+
+注意：2个ip地址不同，为pod的Cluster IP
+
   
 
 ##遇到的问题
