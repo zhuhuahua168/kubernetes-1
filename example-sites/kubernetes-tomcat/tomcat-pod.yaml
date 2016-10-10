@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tomcat
+  labels:
+    name: tomcat
+spec:
+  containers:
+    - name: tomcat
+      image: daocloud.io/daocloud/dao-tomcat:v7.0.55
+      ports:
+        - containerPort: 8080
+          hostPort: 80
+          name: tomcat
