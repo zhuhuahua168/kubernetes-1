@@ -3,7 +3,7 @@ FROM registry.aliyuncs.com/acs-sample/ubuntu:14.04
 
 #拷贝执行脚本到容器根目录中
 ADD start.sh /
-
+ADD workerman-todpole/ /workerman-todpole/
 #配置环境
 RUN apt-get update \
 	&&apt-get -y  install php5-cli git gcc php-pear php5-dev libevent-dev  \
@@ -11,9 +11,7 @@ RUN apt-get update \
 	&&echo extension=libevent.so > /etc/php5/cli/conf.d/libevent.ini \
 	#安装mysql数据库依赖
 	&&apt-get -y install php5-mysql \
-	&&git clone https://github.com/walkor/Workerman \
-	&&git clone https://git.coding.net/zouhuigang/workerman-todpole.git \
-	
+	&&git clone https://github.com/walkor/Workerman  \	
 	#添加sh执行权限
 	&&chmod a+x /start.sh
 

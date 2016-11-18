@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: workerman
+  labels:
+    name: workerman
+spec:
+  containers:
+    - name: workerman
+      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/workerman:v1.0.1
+      ports:
+        - containerPort: 8383
+          hostPort: 8383
+          name: web
+        - name: api
+          containerPort: 3232
+          hostPort: 3232
+      resources:
+          limits:
+            cpu: 100m
