@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-server
+  labels:
+    name: redis-server
+spec:
+  containers:
+    - name: redis-server
+      image: redis:3.2.5
+      ports:
+        - containerPort: 6379
+          name: redis-server
+      env:
+        - name: GET_HOSTS_FROM
+          value: env
+      command: ["redis-server", "--appendonly","yes","--requirepass","anooczhg123456"]
