@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+      name: nginx-phpfpm-yuefan
+  name: nginx-phpfpm-yuefan
+spec:
+  replicas: 2
+  selector:
+      app: nginx-phpfpm-yuefan
+  template:
+    metadata:
+      labels:
+          app: nginx-phpfpm-yuefan
+    spec:
+      containers:
+        - name: nginx
+          image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/nginx_51tywy:v1.0
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 443
+              name: https
+          volumeMounts:
+            - name: nfs
+              mountPath: "/usr/share/nginx/html"
+        - name: php
+          image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php:51tywy
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: nfs
+              mountPath: "/usr/share/nginx/html"
+
+      volumes:
+        - name: nfs
+          nfs:
+            server: 139.196.16.67
+            path: "/nfs_file/sites/yuefan"

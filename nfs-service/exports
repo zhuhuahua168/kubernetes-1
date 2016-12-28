@@ -1,0 +1,5 @@
+/nfs_file/sites/51tywy *(rw,sync,no_root_squash,insecure)
+/nfs_file/mysqldata *(rw,sync,no_root_squash,insecure)
+/nfs_file/sites/yyang *(rw,sync,no_root_squash,insecure)
+/nfs_file/sites/sys *(rw,sync,no_root_squash,insecure)
+/nfs_file/sites/yuefan *(rw,sync,no_root_squash,insecure)

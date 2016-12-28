@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: php-yuefan
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      targetPort: 80
+      port: 80 
+      nodePort: 30008
+      protocol: TCP
+    - name: https
+      targetPort: 443
+      port: 443
+      nodePort: 30009
+      protocol: TCP    
+  selector:
+      app: nginx-phpfpm-yuefan

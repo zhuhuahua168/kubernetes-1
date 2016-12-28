@@ -25,6 +25,10 @@ server:
 
     systemctl start rpcbind nfs-server
 
+停止
+ 
+    systemctl stop  nfs-server
+
 6.挂载
 
 如采用kubernetes则，在pod.yaml中配置。其他挂载参考下面文档
