@@ -99,6 +99,17 @@ php测试代码：
 
 注意：2个ip地址不同，为pod的Cluster IP
 
+
+### 增加服务器重启脚本,部署在/usr/local
+
+server-restart.sh
+
+开机启动:
+
+vi /etc/rc.d/rc.local末尾中增加一行
+
+sh /usr/local/server-restart.sh
+
   
 
 ##遇到的问题
