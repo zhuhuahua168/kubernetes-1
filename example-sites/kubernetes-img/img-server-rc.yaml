@@ -15,7 +15,9 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:latest
+          image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/imgserver:1.0.2
+          securityContext:
+            privileged: true
           ports:
             - containerPort: 80
               name: http
@@ -23,7 +25,7 @@ spec:
               name: https
           volumeMounts:
             - name: nfs
-              mountPath: "/usr/share/nginx/html"
+              mountPath: "/opt/www/hdimage"
       volumes:
         - name: nfs
           nfs:

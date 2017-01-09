@@ -12,3 +12,6 @@ vi /etc/exports :
 查看刷新：
 
     exportfs -rv
+
+### 挂载图片服务器的目录到网站根目录下的uploads/
+

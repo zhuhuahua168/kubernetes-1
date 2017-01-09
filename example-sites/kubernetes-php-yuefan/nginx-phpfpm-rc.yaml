@@ -24,6 +24,8 @@ spec:
           volumeMounts:
             - name: nfs
               mountPath: "/usr/share/nginx/html"
+            - name: imgserver
+              mountPath: "/usr/share/nginx/html/uploads"
         - name: php
           image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php:51tywy
           ports:
@@ -31,9 +33,15 @@ spec:
           volumeMounts:
             - name: nfs
               mountPath: "/usr/share/nginx/html"
+            - name: imgserver
+              mountPath: "/usr/share/nginx/html/uploads"
 
       volumes:
         - name: nfs
           nfs:
             server: 139.196.16.67
             path: "/nfs_file/sites/yuefan"
+        - name: imgserver
+          nfs:
+            server: 139.196.16.67
+            path: "/nfs_file/img"
