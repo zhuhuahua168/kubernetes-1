@@ -82,9 +82,13 @@ vi /etc/hosts
     KUBE_API_PORT="--port=8080"
 
 启动：
+
 systemctl start etcd
+
 systemctl start kube-apiserver
+
 systemctl start kube-controller-manager 
+
 systemctl start kube-scheduler
 
 
@@ -165,6 +169,8 @@ vi /etc/hosts
 
 
  vim /etc/sysconfig/docker:
+
+    INSECURE_REGISTRY='--insecure-registry gcr.io'
 
 
 
