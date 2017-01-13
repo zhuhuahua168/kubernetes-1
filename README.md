@@ -9,8 +9,9 @@
 
 3.搭建kubernetes环境 [查看详情](https://github.com/zouhuigang/kubernetes/tree/master/zhg-study)
 
-4.搭建flanneld网络环境 [查看详情]
+4.搭建flanneld网络环境 [查看详情](https://github.com/zouhuigang/kubernetes/tree/master/flannel)
 
+5.kubernetes1.3版本[查看详情](https://github.com/zouhuigang/kubernetes/tree/master/kubernetes-update)
 
 
 ###kubernetes-nginx-php-mysql搭建说明###
