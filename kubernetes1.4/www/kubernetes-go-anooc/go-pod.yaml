@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: golang-anooc
+  labels:
+    name: golang-anooc
+spec:
+  containers:
+    - name: anooc
+      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/golang-production-anooc:1.6.8
+      ports:
+        - containerPort: 8088
+          name: anooc

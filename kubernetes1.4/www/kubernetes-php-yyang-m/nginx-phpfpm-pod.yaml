@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-phpfpm-yyang-m
+  labels:
+     app: nginx-phpfpm-yyang-m
+spec:
+  containers:
+    - name: nginx
+      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/nginx_51tywy:v1.0
+      ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+      volumeMounts:
+        - name: nfs
+          mountPath: "/usr/share/nginx/html"
+    - name: php
+      image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php:51tywy
+      ports:
+        - containerPort: 9000
+      volumeMounts:
+        - name: nfs
+          mountPath: "/usr/share/nginx/html"
+
+  volumes:
+    - name: nfs
+      nfs:
+        server: 127.0.0.1
+        path: "/nfs_file/sites/sys"

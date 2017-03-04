@@ -2,6 +2,45 @@
 >使用go语言开发过图片处理服务，但是原生的image库的效率不理想，有些png、gif格式图片也不能正常处理。然后搜索解决办法时发现了nginx+lua+graphicmagick这一套解决方案，甚为满意，目前已应用到线上项目，运行稳定。
 nginx做web服务器，对于需要缩放的图片交给lua脚本，lua脚本调用外部的graphicmagick程序来处理图片，然后将处理后的图片返回,由于直接调用graphicmagick所以可能实现各种强大的功能，加文字加水印都是很简单的了。
 
+
+### 使用
+
+##### 请求的原图URL 
+
+http://hdimage.bgh.u1.hgame.com/meinv.png 
+
+请求原图hdimage也会做处理，会将图片的exif信息去除,减小图片的大小，图片的质量尺寸不会变化
+
+##### 将原图等比缩放为100X100的图片 
+
+http://hdimage.bgh.u1.hgame.com/meinv.png_100X100.png
+将原图等比缩放为100X100的图片，并将输出图片格式转为jpg 
+http://hdimage.bgh.u1.hgame.com/meinv.png_100X100.jpg 
+
+对于gif图,如果请求目标图片的格式是jpg，png等非gif格式，是对其第一帧做缩放的，test.gif_100X100.jpg 是取test.gif的第一帧缩放为100X100大小。 
+如果请求的目标图片格式是gif，是对整个gif做缩放，test.gif_100X100.gif返回的是缩放为100X100大小的gif图
+GIF 原图 
+http://hdimage.bgh.u1.hgame.com/p3_614a4dca52ad5de83c13770f8a0e2f50.gif
+取gif的第一帧并做缩放 
+http://hdimage.bgh.u1.hgame.com/p3_614a4dca52ad5de83c13770f8a0e2f50.gif_100X100.jpg
+对整个gif图做缩放 
+http://hdimage.bgh.u1.hgame.com/p3_614a4dca52ad5de83c13770f8a0e2f50.gif_100X100.gif
+裁剪方式
+
+默认采用等比缩放的方式，并且是依照目标图片的宽度做等比缩放的
+可以指定特定的裁剪方式 [width]X[height]X[type] 例如meinv.png_100X100X0.png
+具体的裁剪方式
+
+meinv.png 原图的尺寸为643X391
+
+默认方式（根据图片宽度等比缩小，只会缩小图片，如果请求图片尺寸大于原图不会扩大图片尺寸） 
+http://hdimage.bgh.u1.hgame.com/meinv.png_100X100.png 返回的图片大小为 100X61
+
+0 按照宽高缩放比小的比例进行等比缩放，保证返回的图片宽度>=请求宽度，返回图片高度>=请求高度 
+http://hdimage.bgh.u1.hgame.com/meinv.png_100X100X0.png 
+返回图片大小为 164X100
+
+
 ### 1.环境
 
     docker pull centos:7.3.1611
@@ -227,4 +266,6 @@ start-imgserver.sh脚本中添加
 参考文献:
 
 [http://www.open-open.com/lib/view/open1452400884823.html](http://www.open-open.com/lib/view/open1452400884823.html)
+
+[http://shanks.leanote.com/post/Untitled-55ca439338f41148cd000759-23?utm_source=tuicool&utm_medium=referral](http://shanks.leanote.com/post/Untitled-55ca439338f41148cd000759-23?utm_source=tuicool&utm_medium=referral)
 
