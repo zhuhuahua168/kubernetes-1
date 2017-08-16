@@ -313,6 +313,22 @@ curl -sf -X PUT "http://139.196.16.67:8500/v1/agent/service/register" --data "{
 
 consul-template -config /data/cfg/consul/tmpl.json > consul-template.out 2>&1 &
 
+
+
+### 修改startup的域名
+
+curl -sf -X PUT "http://139.196.16.67:8500/v1/agent/service/register" --data "{
+		  \"ID\": \"dev_group_sites_startup_1\",
+		  \"Name\": \"dev_group_sites_startup\",
+		  \"Tags\": [],
+		  \"Address\": \"127.0.0.1\",
+		  \"Port\": 30012
+		}" > /dev/null
+
+删除:
+
+curl 139.196.16.67:8500/v1/agent/service/deregister/dev_group_sites_startup_1
+
 问题：
 
 Q.如果kubectl get pods报错503 services等等，则可能是8080端口被占用了,因为haproxy用了一个8080端口，所以不能启动了。

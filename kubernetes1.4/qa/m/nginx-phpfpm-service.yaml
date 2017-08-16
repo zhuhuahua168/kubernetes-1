@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: phptest3
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      targetPort: 80
+      port: 80 
+      nodePort: 30006
+      protocol: TCP
+    - name: https
+      targetPort: 443
+      port: 443
+      nodePort: 30007
+      protocol: TCP    
+  selector:
+      app: nginx-phpfpm-yyang-m

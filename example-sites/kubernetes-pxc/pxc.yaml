@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+      name: pxc-app
+  name: pxc-app
+spec:
+  replicas: 1 #扩容为奇数kubectl scale rc pxc-app --replicas=3
+  selector:
+    app: pxc-app
+  template:
+    metadata:
+      name: pxc
+      labels:
+        app: pxc-app
+    spec:
+      containers:
+        - name: percona-xtradb-cluster
+          image: perconalab/percona-xtradb-cluster:5.6test
+          ports:
+            - containerPort: 3306
+            - containerPort: 4567
+            - containerPort: 4568
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "Theistareyk"
+            - name: DISCOVERY_SERVICE
+              value: "192.168.122.142:2379"
+            - name: CLUSTER_NAME
+              value: "k8scluster2"
+            - name: XTRABACKUP_PASSWORD
+              value: "Theistare"
+          resources:
+            limits:
+              cpu: 100m
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        hostPath: #本地数据卷#emptyDir: {} #临时存储
+          path: /mnt2/mysql-data
+      #imagePullPolicy: Always
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+      name: proxysql-app
+  name: proxysql-rc
+spec:
+  replicas: 1 # tells deployment to run N pods matching the template
+  selector:
+    front: proxysql
+  template: # create pods using pod definition in this template
+    metadata:
+      name: proxysql
+      labels:
+        app: pxc-app
+        front: proxysql
+    spec:
+      containers:
+      - name: proxysql
+        image: perconalab/proxysql
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3306
+        - containerPort: 6032
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "Theistareyk"
+        - name: DISCOVERY_SERVICE
+          value: "192.168.122.142:2379"
+        - name: CLUSTER_NAME
+          value: "k8scluster2"
+        - name: MYSQL_PROXY_USER
+          value: "proxyuser"
+        - name: MYSQL_PROXY_PASSWORD
+          value: "s3cret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pxc-service
+  labels:
+    app: pxc-app
+spec:
+  type: NodePort
+  ports:
+    # the port that this service should serve on
+    - name: "mysql"
+      port: 3306
+      targetPort: 3306
+      nodePort: 30001
+      protocol: TCP
+    - name: "proxyadm"
+      port: 6032
+      targetPort: 6032
+      nodePort: 30002
+      protocol: TCP
+  # label keys and values that must match in order to receive traffic for this service
+  selector:
+    front: proxysql
+
+
+

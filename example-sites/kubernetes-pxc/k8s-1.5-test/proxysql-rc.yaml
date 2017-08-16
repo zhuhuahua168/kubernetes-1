@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+      name: proxysql-app
+  name: proxysql-rc
+spec:
+  replicas: 1 # tells deployment to run N pods matching the template
+  selector:
+    front: proxysql
+  template: # create pods using pod definition in this template
+    metadata:
+      name: proxysql
+      labels:
+        app: pxc-app
+        front: proxysql
+    spec:
+      containers:
+      - name: proxysql
+        image: perconalab/proxysql
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3306
+        - containerPort: 6032
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "Theistareyk"
+        - name: DISCOVERY_SERVICE
+          value: "192.168.122.142:2379"
+        - name: CLUSTER_NAME
+          value: "k8scluster2"
+        - name: MYSQL_PROXY_USER
+          value: "proxyuser"
+        - name: MYSQL_PROXY_PASSWORD
+          value: "s3cret"

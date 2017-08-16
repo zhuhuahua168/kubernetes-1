@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+      name: nginx-phpfpm-startup
+  name: nginx-phpfpm-startup
+spec:
+  replicas: 2
+  selector:
+      app: nginx-phpfpm-startup
+  template:
+    metadata:
+      labels:
+          app: nginx-phpfpm-startup
+    spec:
+      containers:
+        - name: nginx
+          image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/nginx_51tywy:v1.0
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 443
+              name: https
+          volumeMounts:
+            - name: nfs
+              mountPath: "/usr/share/nginx/html"
+            - name: imgserver
+              mountPath: "/usr/share/nginx/html/uploads"
+        - name: php
+          image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php7_swoole:1.0.0
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: nfs
+              mountPath: "/usr/share/nginx/html"
+            - name: imgserver
+              mountPath: "/usr/share/nginx/html/uploads"
+
+      volumes:
+        - name: nfs
+          nfs:
+            server: 139.196.16.67
+            path: "/nfs_file/sites/startup"
+        - name: imgserver
+          nfs:
+            server: 139.196.16.67
+            path: "/nfs_file/img"

@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+      name: pxc-app
+  name: pxc-app
+spec:
+  replicas: 3
+  selector:
+    app: pxc-app
+  template:
+    metadata:
+      name: pxc
+      labels:
+        app: pxc-app
+    spec:
+      containers:
+        - name: percona-xtradb-cluster
+          image: perconalab/percona-xtradb-cluster:5.6test
+          ports:
+            - containerPort: 3306
+            - containerPort: 4567
+            - containerPort: 4568
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "Theistareyk"
+            - name: DISCOVERY_SERVICE
+              value: "192.168.122.142:2379"
+            - name: CLUSTER_NAME
+              value: "k8scluster2"
+            - name: XTRABACKUP_PASSWORD
+              value: "Theistare"
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        emptyDir: {}
+      #imagePullPolicy: Always
