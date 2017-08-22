@@ -3,7 +3,7 @@
 
 ### 构建新版https
 
-	cd /d/www/github/kubernetes/docker/nginx/aliyun-https
+	 cd /d/www/github/kubernetes/docker/nginx/aliyun-https
 
 	 sudo docker build -t  registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/nginx_51tywy:v1.0.1 .
 

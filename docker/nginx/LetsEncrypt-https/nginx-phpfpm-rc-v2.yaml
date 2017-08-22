@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+      name: www.yyang.net.cn-rc-labels
+  name: www.yyang.net.cn-rc-name-v1
+spec:
+  replicas: 1
+  selector:
+    app: www.yyang.net.cn-pod-app
+    version: v1
+  template:
+    metadata:
+      labels:
+          app: www.yyang.net.cn-pod-app
+          version: v1
+    spec:
+      containers:
+        - name: nginx
+          image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/nginx_51tywy:v1.0.2
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 443
+              name: https
+          volumeMounts:
+            - name: nfs
+              mountPath: "/usr/share/nginx/html"
+        - name: php
+          image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php:51tywy
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: nfs
+              mountPath: "/usr/share/nginx/html"
+
+      volumes:
+        - name: nfs
+          nfs:
+            server: 139.196.16.67
+            path: "/nfs_file/sites/yyang"
