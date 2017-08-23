@@ -3,17 +3,17 @@ kind: ReplicationController
 metadata:
   labels:
       name: www.yyang.net.cn-rc-labels
-  name: www.yyang.net.cn-rc-name-v2
+  name: www.yyang.net.cn-rc-name-v1
 spec:
   replicas: 1
   selector:
     app: www.yyang.net.cn-pod-app
-    version: v2
+    version: v1
   template:
     metadata:
       labels:
           app: www.yyang.net.cn-pod-app
-          version: v2
+          version: v1
     spec:
       containers:
         - name: nginx
@@ -26,8 +26,6 @@ spec:
           volumeMounts:
             - name: nfs
               mountPath: "/usr/share/nginx/html"
-            - name: cert
-              mountPath: "/etc/nginx/cert/"
         - name: php
           image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/php:51tywy
           ports:
@@ -41,7 +39,3 @@ spec:
           nfs:
             server: 139.196.16.67
             path: "/nfs_file/sites/yyang"
-        - name: cert
-          nfs:
-            server: 139.196.16.67
-            path: "/etc/nginx/cert"

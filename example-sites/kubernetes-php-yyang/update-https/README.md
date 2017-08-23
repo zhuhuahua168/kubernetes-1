@@ -43,6 +43,17 @@
 
 
 
+信宝袋：
+
+	curl -sf -X PUT "http://127.0.0.1:8500/v1/agent/service/register" --data "{
+		  \"ID\": \"dev_https_group_sites_xbaod2_1\",
+		  \"Name\": \"dev_https_group_sites_xbaod2\",
+		  \"Tags\": [],
+		  \"Address\": \"127.0.0.1\",
+		  \"Port\": 30018
+		}" > /dev/null
+
+
 #### 更新http端口,30003->30017
 
 删除之前端口：
