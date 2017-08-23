@@ -1,6 +1,9 @@
 #!/bin/bash
-echo "sh runing letsencrypt.sh"
-source letsencrypt.sh letsencrypt.conf
+nowtime=`date +%Y-%m-%d_%H.%M.%S`
+echo ${nowtime}" sh runing letsencrypt.sh"
+#source letsencrypt.sh letsencrypt.conf
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source ${DIR}/letsencrypt.sh letsencrypt.conf
 sleep 5
 
 echo "Init nginx ..."

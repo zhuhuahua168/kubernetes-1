@@ -85,11 +85,11 @@ reload-nginx-https.sh
 
 每个月执行一次(正式环境)：
 
-	0 0 1 * * /etc/nginx/certs/reload-nginx-https.sh >> /etc/nginx/certs/lets-encrypt.log 2>&1
+	0 0 1 * *  cd /etc/nginx/cert/ && ./reload-nginx-https.sh >> /etc/nginx/cert/lets-encrypt.log 2>&1
 
 每10分钟执行一次(测试用,测试完成记得删除~~):
 
-		*/10 * * * * /etc/nginx/certs/reload-nginx-https.sh >> /etc/nginx/certs/lets-encrypt.log 2>&1
+		*/10 * * * *  cd /etc/nginx/cert/ && ./reload-nginx-https.sh >> /etc/nginx/cert/lets-encrypt.log 2>&1
 
 
 在浏览器查看证书具体时间
