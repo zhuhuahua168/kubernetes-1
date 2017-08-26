@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: golang-anooc-rc-labels
+  name: golang-anooc-rc-name-v1
+spec:
+  replicas: 1
+  selector:
+      app: golang-anooc-pod-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: golang-anooc-pod-app
+        version: v1
+    spec:
+      containers:
+        - name: anooc-image
+          image: registry.cn-hangzhou.aliyuncs.com/zhg_docker_ali_r/golang-production-anooc:1.8.2
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 443
+              name: https
+          volumeMounts:
+            - name: imgserver
+              mountPath: "/upload"
+      volumes:
+        - name: imgserver
+          nfs:
+            server: 139.196.16.67
+            path: "/nfs_file/img/anooc"
