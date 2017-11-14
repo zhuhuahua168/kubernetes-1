@@ -87,3 +87,16 @@ A:
     cat /etc/exports
     exportfs -rv 
     查看挂载的目录是否有被共享出来
+
+
+www共享：
+
+	/nfs_file/sites/51tywy *(rw,sync,no_root_squash,insecure)
+	/nfs_file/mysqldata *(rw,sync,no_root_squash,insecure)
+	/nfs_file/sites/yyang *(rw,sync,no_root_squash,insecure)
+	/nfs_file/sites/sys *(rw,sync,no_root_squash,insecure)
+	/nfs_file/sites/yuefan *(rw,sync,no_root_squash,insecure)
+	/nfs_file/sites/startup *(rw,sync,no_root_squash,insecure)
+	/usr/local/www/zhongdongfei *(rw,sync,no_root_squash,insecure)
+	/nfs_file/img *(rw,sync,no_root_squash,insecure)
+	/etc/nginx/cert *(rw,sync,no_root_squash,insecure)

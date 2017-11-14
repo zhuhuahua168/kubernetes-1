@@ -16,4 +16,4 @@ spec:
       nodePort: 30007
       protocol: TCP    
   selector:
-      app: nginx-phpfpm-yyang-m
+      app: nginx-phpfpm
