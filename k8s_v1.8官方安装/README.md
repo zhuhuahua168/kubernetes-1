@@ -47,6 +47,19 @@
 	kubectl create -f myweb-rc.yaml
 	kubectl create -f myweb-svc.yaml
 
+
+测试自己的镜像:
+
+	kubectl create -f go-rc.yaml
+	kubectl create -f go-svc.yaml
+
+访问自己的镜像:
+
+	http://ip:30019
+	https://ip:30020
+
+
+
 问题汇总:
 
 Q1:在服务器上用curl 127.0.0.1:30001能得到请求，但是外部却不能访问
