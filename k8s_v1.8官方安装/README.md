@@ -1,4 +1,4 @@
-### 手动在CentOS7.2上部署kubernetes1.6集群
+### 手动在CentOS7.2上部署kubernetes1.8.4集群
 
 环境：
 
