@@ -78,6 +78,61 @@ node启动:
 	kubectl describe -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.5.1/src/deploy/kubernetes-dashboard.yaml
 
 
+	docker pull registry.cn-hangzhou.aliyuncs.com/kube_containers/kubernetes-dashboard-amd64:v1.5.1
+
+	docker tag registry.cn-hangzhou.aliyuncs.com/kube_containers/kubernetes-dashboard-amd64:v1.5.1 gcr.io/google_containers/kubernetes-dashboard-amd64:v1.5.1
+
+	kubectl get pods --all-namespaces
+
+	kubectl describe pod kubernetes-dashboard-3203831700-9l6fv  --namespace=kube-system
+	kubectl logs  kubernetes-dashboard-1583850781-rqj3n   --namespace=kube-system
+	kubectl delete pod kubernetes-dashboard-1583850781-pnhn2 --namespace=kube-system
+
+
+	 kubectl cluster-info
+
+
+### 安装flannel
+	
+	yum install -y flannel
+
+编辑配置文件:
+
+	# vim /etc/sysconfig/flanneld
+
+	# Flanneld configuration options  
+	
+	# etcd url location.  Point this to the server where etcd runs
+	FLANNEL_ETCD="http://k8s-master1:2379"
+	
+	# etcd config key.  This is the configuration key that flannel queries
+	# For address range assignment
+	FLANNEL_ETCD_KEY="/coreos.com/network"                                                                                                                                                                                       
+	
+	# Any additional options that you want to pass
+	#FLANNEL_OPTIONS=""
+	
+	# systemctl enable flanneld.service ; systemctl start flanneld.service
+
+
+
+在master上的etcd配置文件/etc/etcd/etcd.conf,把localhost换成k8s-master
+
+	ETCD_LISTEN_CLIENT_URLS="http://k8s-master1:2379"
+	
+	ETCD_ADVERTISE_CLIENT_URLS="http://k8s-master1:2379"
+
+启动:
+
+	etcdctl  set /coreos.com/network/config '{"Network":"10.254.0.0/16"}'
+	systemctl stop docker
+	systemctl start flanneld
+
+
+etcd启动不了:
+
+	etcdctl –-endpoints "http://47.100.76.132:2379,http://47.100.76.132:2380" ls 
+
 
 
 ### 问题
@@ -112,6 +167,74 @@ Q4:open /etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt
 	
 	把服务都重启一遍就好了
 
+Q5:kubelet does not have ClusterDNS IP configured and cannot create Pod using "ClusterFirst"
+或 Get http://47.100.76.132:8080/version: dial tcp 47.100.76.132:8080: getsockopt: connection refused
+
+A5:
+
+	The kubelet service needs a command-line flag to set the cluster DNS IP - it looks like you're running kube-dns, so you can get that IP by either running kubectl get services --namespace=kube-system or grabbing the IP from the "ClusterIP" field on the kube-dns service YAML or JSON config.
+
+	Once you have the IP, you'll have to set the --cluster-dns command-line flag for kubelet.
+	
+	I haven't used kubeadm to setup a cluster, so I'm not sure how it runs the services and can't say how to change the command-line flags - hopefully somebody who knows can provide input for that piece.
+
+	重新配置apiserver,config的KUBE_MASTER="--master=http://47.100.76.132:8080"
+
+	访问ip即可，然后重启apiserver即可
+
+
+Q6:启动kube-state-metrics-deployment监控镜像，报错
+	Warning MissingClusterDNS       kubelet does not have ClusterDNS IP configured and cannot create Pod using "ClusterFirst" policy. Falling back to DNSDefault policy.
+
+A6:
+
+	配置kubelet中的vi /etc/kubernetes/kubelet,修改为如下参数：
+
+	KUBELET_ADDRESS="--address=0.0.0.0"
+	KUBELET_PORT="--port=10250" #如果关闭了，就开启
+	KUBELET_HOSTNAME="--hostname-override=k8s-master1" #修改成节点的hostname，如：k8s-node1
+	KUBELET_API_SERVER="--api-servers=http://k8s-master1:8080" #修改成master的hostname,需在/etc/hosts中配置ip映射
+
+
+Q7:kubelet不能调度，具体表现在kubectl delete /create超时或不能删除pod等问题,
+	kube-controller-manager.service holdoff time over, scheduling restart.
+	timed out waiting for "mysql" to be synced
+
+A7： kube-controller-manager控制器出问题了.
+	确保/var/run/kubernetes中有kubelet.crt  kubelet.key 这2个文件
+	最后发现是key的问题：
+	
+	KUBE_CONTROLLER_MANAGER_ARGS="--service-account-private-key-file=/var/run/kubernetes/apiserver.key \
+     --root-ca-file=/var/run/kubernetes/ca.crt"
+
+	将上面的清空，改为
+
+	KUBE_CONTROLLER_MANAGER_ARGS=""
+	即正常了
+
+
+Q8:下载不下来镜像,报错open /etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt no such file or directory
+
+A8:
+
+	#yum install *rhsm*
+
+	检查apiserver的8080端口是否可用
+
+
+
+Q9:curl -v 10.254.0.1:443不能访问
+
+	https://192.168.122.147:6443/swaggerapi/
+	
+	
+	
+
+	
+
+
+[https://stackoverflow.com/questions/45837246/kubelet-does-not-have-clusterdns-ip-configured-and-cannot-create-pod-using-clus](https://stackoverflow.com/questions/45837246/kubelet-does-not-have-clusterdns-ip-configured-and-cannot-create-pod-using-clus)
+
 
 
 
@@ -127,6 +250,10 @@ Q4:open /etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt
 [http://blog.csdn.net/jinzhencs/article/details/51435020](http://blog.csdn.net/jinzhencs/article/details/51435020)
 
 [http://www.jianshu.com/p/9527b485929f](http://www.jianshu.com/p/9527b485929f)
+
+[https://www.sunmite.com/docker/k8s-errors-1.html](https://www.sunmite.com/docker/k8s-errors-1.html)
+
+[https://mritd.me/2016/12/06/try-traefik-on-kubernetes/#13ingress](https://mritd.me/2016/12/06/try-traefik-on-kubernetes/#13ingress)
 
 	
 
