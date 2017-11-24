@@ -1342,17 +1342,6 @@ A2:
 	yum install *rhsm*
 	docker pull registry.access.redhat.com/rhel7/pod-infrastructure:latest
 
-
-
-
-
-
-
-
-参考文档:
-
-[https://github.com/kubernetes/kubernetes/issues/54542](https://github.com/kubernetes/kubernetes/issues/54542)
-
 	
 
 	
