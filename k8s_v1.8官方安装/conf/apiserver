@@ -6,10 +6,11 @@
 #
 ## The address on the local server to listen to.
 #KUBE_API_ADDRESS="--insecure-bind-address=sz-pg-oam-docker-test-001.tendcloud.com"
-KUBE_API_ADDRESS="--advertise-address=192.168.122.148 --bind-address=192.168.122.148 --insecure-bind-address=192.168.122.148"
-#
+#KUBE_API_ADDRESS="--advertise-address=192.168.122.148 --bind-address=192.168.122.148 --insecure-bind-address=192.168.122.148"
+#KUBE_API_ADDRESS="--insecure-bind-address=0.0.0.0"
+KUBE_API_ADDRESS="--advertise-address=192.168.122.148 --insecure-bind-address=0.0.0.0 --bind-address=192.168.122.148"
 ## The port on the local server to listen on.
-#KUBE_API_PORT="--port=8080"
+KUBE_API_PORT="--port=8080 --secure-port=6443"
 #
 ## Port minions listen on
 #KUBELET_PORT="--kubelet-port=10250"
@@ -21,10 +22,10 @@ KUBE_ETCD_SERVERS="--etcd-servers=https://192.168.122.148:2379"
 KUBE_SERVICE_ADDRESSES="--service-cluster-ip-range=10.254.0.0/16"
 #
 ## default admission control policies
-KUBE_ADMISSION_CONTROL="--admission-control=ServiceAccount,NamespaceLifecycle,NamespaceExists,LimitRanger,ResourceQuota"
+KUBE_ADMISSION_CONTROL="--admission-control=ServiceAccount,NamespaceLifecycle,NamespaceExists,NodeRestriction,LimitRanger,ResourceQuota"
 #
 ## Add your own!
-KUBE_API_ARGS="--authorization-mode=RBAC \
+KUBE_API_ARGS="--authorization-mode=RBAC,Node\
 	--runtime-config=rbac.authorization.k8s.io/v1beta1 \
 	--kubelet-https=true --experimental-bootstrap-token-auth \
 	--token-auth-file=/etc/kubernetes/token.csv \
